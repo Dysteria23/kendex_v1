@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/livewire/src/**/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+
+    /* Paleta de libro mayor: tinta, bahía, papel. Todos los pares texto/fondo cumplen WCAG 2.1 AA. */
+    --color-ink: #14263a;
+    --color-harbor: #0e5f63;
+    --color-harbor-dark: #0a4a4d;
+    --color-paper: #f3f6f6;
+    --color-line: #d2dbdc;
+    --color-muted: #4b5d66;
+}
+
+@layer base {
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    [x-cloak] { display: none !important; }
+    :focus-visible { outline: 3px solid #0e5f63; outline-offset: 2px; }
+}
+
+@layer components {
+    .skip { @apply sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-ink; }
+
+    .kx-card { @apply rounded-lg border border-line bg-white p-5; }
+    .kx-h1 { @apply font-serif text-2xl font-semibold tracking-tight text-ink; }
+    .kx-h2 { @apply font-serif text-lg font-semibold text-ink; }
+    .kx-muted { @apply text-sm text-muted; }
+
+    .kx-btn { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-harbor px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-harbor-dark disabled:cursor-not-allowed disabled:opacity-60; }
+    .kx-btn-ghost { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-slate-500 bg-white px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-slate-100; }
+    .kx-btn-danger { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-red-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-800; }
+    .kx-link { @apply font-medium text-harbor underline underline-offset-2 hover:text-harbor-dark; }
+
+    .kx-label { @apply mb-1 block text-sm font-medium text-ink; }
+    .kx-input { @apply block w-full rounded-md border border-slate-500 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-500; }
+    .kx-error { @apply mt-1 text-sm font-medium text-red-800; }
+    .kx-hint { @apply mt-1 text-xs text-muted; }
+
+    .kx-table { @apply w-full min-w-[40rem] text-sm; }
+    .kx-table th { @apply border-b border-line px-3 py-2 text-left font-semibold text-muted; }
+    .kx-table td { @apply border-b border-line px-3 py-2 align-top tabular-nums; }
+    .kx-table tbody tr:hover { @apply bg-slate-50; }
+
+    .kx-badge { @apply inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+    .kx-badge-amber { @apply bg-amber-100 text-amber-900; }
+    .kx-badge-teal { @apply bg-teal-100 text-teal-900; }
+    .kx-badge-red { @apply bg-red-100 text-red-900; }
+    .kx-badge-blue { @apply bg-sky-100 text-sky-900; }
+    .kx-badge-gray { @apply bg-slate-200 text-slate-800; }
+    .kx-badge-green { @apply bg-emerald-100 text-emerald-900; }
+
+    .kx-alert { @apply rounded-md border px-4 py-3 text-sm; }
+    .kx-alert-ok { @apply border-emerald-300 bg-emerald-50 text-emerald-900; }
+    .kx-alert-error { @apply border-red-300 bg-red-50 text-red-900; }
+    .kx-alert-warn { @apply border-amber-300 bg-amber-50 text-amber-900; }
+
+    .kx-nav a { @apply flex min-h-10 items-center rounded-md px-3 text-sm font-medium text-slate-200 hover:bg-white/10; }
+    .kx-nav a[aria-current='page'] { @apply bg-white/15 text-white; }
+}

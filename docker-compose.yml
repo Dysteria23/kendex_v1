@@ -1,0 +1,20 @@
+# Servicios de desarrollo: PostgreSQL 16, Redis 7, MinIO (S3) y Mailpit (correo).
+services:
+  postgres:
+    image: postgres:16
+    environment: { POSTGRES_DB: kendex, POSTGRES_USER: kendex, POSTGRES_PASSWORD: secret }
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment: { MINIO_ROOT_USER: kendex, MINIO_ROOT_PASSWORD: kendex-secret }
+    ports: ["9000:9000", "9001:9001"]
+    volumes: [miniodata:/data]
+  mailpit:
+    image: axllent/mailpit
+    ports: ["1025:1025", "8025:8025"]
+volumes: { pgdata: {}, miniodata: {} }
